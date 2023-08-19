@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
 
 const styles = StyleSheet.create({
@@ -22,16 +22,27 @@ const styles = StyleSheet.create({
 });
 
 export const Home = () => {
+  const perguntas = require('../../../assets/perguntas.json')
+
+  const [pergunta, setPergunta] = useState("teste");
+
+  const getQuestion = () =>{
+
+    let NewPergunta = perguntas["questoes"][Math.floor(Math.random()*perguntas["questoes"].length)]
+    
+    return setPergunta(NewPergunta)
+  }
+
   return (
     <View>
       <Button
         onPress={() => {
-          console.log("You tapped the button!");
+          getQuestion()
         }}
         title="Press Me"
       />
       <View style={styles.box}>
-        <Text style={styles.text}>Aqui iria uma pergunta</Text>
+        <Text style={styles.text}>{pergunta}</Text>
       </View>
     </View>
   );
