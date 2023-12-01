@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, Text, View, Button, TouchableOpacity } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
@@ -8,42 +8,64 @@ const styles = StyleSheet.create({
   text: {
     textAlign: "center",
     color: "white",
+    marginHorizontal: 30,
   },
   red: {
     color: "red",
   },
   box: {
     backgroundColor: "black",
-    width: 200,
-    height: 200,
+    width: 300,
+    height: 300,
     flexDirection: "column",
     justifyContent: "center",
+    borderRadius:3
   },
+  askButton: {
+    marginTop: 20,
+    width:300,
+    height:30,
+    textAlign: "center",
+    backgroundColor: "blue",
+    flexDirection: "column",
+    justifyContent: "center",
+    borderRadius:8
+  },
+  askText:{
+    color: "white",
+    textAlign: "center",
+  }
 });
 
 export const Home = () => {
-  const perguntas = require('../../../assets/perguntas.json')
+  const perguntas = require("../../../assets/perguntas.json");
 
-  const [pergunta, setPergunta] = useState("teste");
+  const [pergunta, setPergunta] = useState("Escolha a primeira pergunta");
 
-  const getQuestion = () =>{
+  const getQuestion = () => {
+    let NewPergunta =
+      perguntas["questoes"][
+        Math.floor(Math.random() * perguntas["questoes"].length)
+      ];
 
-    let NewPergunta = perguntas["questoes"][Math.floor(Math.random()*perguntas["questoes"].length)]
-    
-    return setPergunta(NewPergunta)
-  }
+    return setPergunta(NewPergunta);
+  };
 
   return (
     <View>
-      <Button
-        onPress={() => {
-          getQuestion()
-        }}
-        title="Press Me"
-      />
       <View style={styles.box}>
         <Text style={styles.text}>{pergunta}</Text>
       </View>
+      <TouchableOpacity
+        onPress={() => {
+          getQuestion();
+        }}
+        style={styles.askButton}
+      >
+        <View>
+          <Text style={styles.askText}>Pergunte</Text>
+        </View>
+      </TouchableOpacity>
     </View>
   );
 };
