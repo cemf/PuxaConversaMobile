@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
 });
 
 export const Home = () => {
-  const perguntas = require("../../../assets/perguntas.json");
+  const perguntas = require("../../perguntas.json")
 
   const [pergunta, setPergunta] = useState("Escolha a primeira pergunta");
 
